@@ -28,6 +28,7 @@ button:focus {
 
 .title {
     margin: 50px 0;
+    color: #fff;
 }
 
 .purple {
@@ -95,7 +96,7 @@ button:focus {
 .symbol:hover,
 #decimal:hover,
 #clear:hover,
-#back:hover,
+#backspace:hover,
 #equal:hover {
   background-color: #52397b;
   cursor: pointer;
@@ -195,4 +196,5 @@ button:focus {
 footer {
     margin-top: 30px;
     font-size: 15px;
+    color: #fff;
 }
