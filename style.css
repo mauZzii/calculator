@@ -116,11 +116,11 @@ button:focus {
 }
 
 /* Setting button grid areas */
-#add {
+#addition {
     grid-area: add;
 }
 
-#subtract {
+#subtraction {
     grid-area: subtract;
 }
 
