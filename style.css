@@ -66,18 +66,17 @@ button:focus {
     border-radius: 5px;
 }
 
-.calc-output,
+.calc-history,
 .calc-input {
   justify-self: end;
   align-self: end;
   height: 40px;
-  padding-bottom: 5px;
   overflow: hidden;
   text-overflow: clip;
   color: #52397b;
 }
 
-.calc-output {
+.calc-history {
   font-size: 25px;
 }
 

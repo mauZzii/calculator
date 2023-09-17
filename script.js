@@ -1,37 +1,45 @@
 const BUTTONS = document.querySelectorAll('.symbol');
 const INPUT = document.querySelector('.calc-input');
 const HISTORY = document.querySelector('.calc-history');
-const OPERATORS = document.querySelector('.operator');
+const OPERATORS = document.querySelectorAll('.operator');
 const EQUALBTN = document.querySelector('#equal');
 const DECIMAL = document.querySelector('#decimal');
 
 let displayHistory = '';
 let displayInput = '';
+let displayResult = '';
 
 let action = '';
 let num1 = '';
 let num2 = '';
 
 //operations
-const addition = (a, b) => a + b;
-
-const subtraction = (a, b) => a - b;
-
-const multiply = (a, b) => a * b;
-
-const divide = (a, b) => {
-    if (b === 0) {
-        return "heh you thought"
-    } else {
-        return a / b;
-    }
+function addition(a, b) {
+    return a + b;
 };
 
-const power = (a, b) => {
+function subtraction(a, b) {
+    return a - b;
+};
+
+function multiply(a, b) {
+    return a * b;
+};
+
+function divide(a, b) {
+    if (b === 0) {
+        return "you thought"
+    } else {
+        return a / b;
+    };
+};
+
+function power(a, b) {
     let answer = 1;
     for (let i = 0; i < b; i+=1) {
         answer *= a;
     };
+    return answer;
 };
 
 //round to two places
@@ -63,19 +71,25 @@ function calculate(job, firstNum, secondNum) {
     num2 = '';
 
     //will give a statement if trying to divide by zero
-    if (displayInput !== 'heh you thought') {
+    if (displayInput !== 'you thought') {
         return roundNumber(displayInput);
     };
         return displayInput;
 };
 
+//shows the result
+function showResult() {
+    displayResult = `${calculate(action, num1, num2)}`;
+    INPUT.textContent = displayResult;
+};
+
 //shows calculation history based off operator
 function showLast(symbol) {
     switch (true) {
-        case (symbol === 'add'):
+        case (symbol === 'addition'):
             displayHistory = `${num1}+${num2}=${calculate(action, num1, num2)}`;
             break;
-        case (symbol === 'subtract'):
+        case (symbol === 'subtraction'):
             displayHistory = `${num1}-${num2}=${calculate(action, num1, num2)}`;
             break;
         case (symbol === 'multiply'):
@@ -94,7 +108,7 @@ function showLast(symbol) {
 //allows for button state declaration
 function setOperatorBtnState(state) {
     OPERATORS.forEach((operator) => {
-      if (state === 'disable' || displayInput === 'heh you thought' || displayInput === Infinity) {
+      if (state === 'disable' || displayInput === 'you thought' || displayInput === Infinity) {
         operator.setAttribute('disabled', '');
       } else if (state === 'enable') {
         operator.removeAttribute('disabled', '');
@@ -148,7 +162,7 @@ function clearDisplay(task) {
 };
 
 function displayNumber(button) {
-    if (action === 'equal' || displayInput === 'heh you thought' || displayInput === Infinity) {
+    if (action === 'equal' || displayInput === 'you thought' || displayInput === Infinity) {
       clearDisplay('clear');
     };
     if (INPUT.textContent === '0') {
@@ -161,7 +175,7 @@ function displayNumber(button) {
 };
 
 function displayDecimal(button) {
-    if (displayInput !== '' && action === 'equals') {
+    if (displayInput !== '' && action === 'equal') {
       clearDisplay('clear');
       INPUT.textContent += button.textContent;
     } else if (INPUT.textContent === '' || INPUT.textContent === '.') {
@@ -187,6 +201,8 @@ function buttonListener() {
             } else if (button.id === 'equal') {
                 operate(button);
                 setOperatorBtnState('enable');
+                //making it only show the result in input div when = is pressed
+                showResult();
             } else if (button.id === 'backspace') {
                 clearDisplay('back');
             } else if (button.id === 'clear') {
