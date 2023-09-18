@@ -204,7 +204,7 @@ function buttonListener() {
                 //making it only show the result in input div when = is pressed
                 showResult();
             } else if (button.id === 'backspace') {
-                clearDisplay('back');
+                clearDisplay('backspace');
             } else if (button.id === 'clear') {
                 clearDisplay('clear');
             };
